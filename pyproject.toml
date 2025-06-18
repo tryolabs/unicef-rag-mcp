@@ -7,7 +7,7 @@ requires-python = "~=3.11"
 readme = "README.md"
 dependencies = [
     "llama-index>=0.12.42",
-    "mcp>=1.9.4",
+    "mcp[cli]>=1.9.4",
 ]
 
 [build-system]
