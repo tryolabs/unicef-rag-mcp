@@ -37,7 +37,7 @@ mcp dev rag/server.py
 To run the tests, run:
 
 ```bash
-uv run tests/test_src.py
+uv run pytest
 ```
 
 ## License
