@@ -6,6 +6,7 @@ from llama_index.core.retrievers import VectorIndexRetriever
 
 from rag.constants import (
     CCRI_METADATA_PERSIST_DIR,
+    EMPTY_QUERY_RESPONSE,
 )
 
 
@@ -24,6 +25,9 @@ def get_ccri_metadata(query: str) -> str:
     Returns:
         The most relevant chunks from the CCRI technical documentation as a string.
     """
+    if query.strip() == "":
+        return EMPTY_QUERY_RESPONSE
+
     vector_index = load_index_from_storage(  # type: ignore[misc]
         StorageContext.from_defaults(persist_dir=CCRI_METADATA_PERSIST_DIR)
     )
