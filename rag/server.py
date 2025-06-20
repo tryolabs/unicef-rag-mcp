@@ -1,12 +1,13 @@
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
+from rag.config import config
 from rag.handlers import get_ccri_metadata
 from rag.logging_config import get_logger
 
 load_dotenv(override=True)
 
-mcp = FastMCP("RAG MCP")
+mcp = FastMCP("RAG MCP", port=config.server.port)
 
 
 logger = get_logger(__name__)
@@ -28,3 +29,15 @@ def get_ccri_relevant_information(query: str) -> str:
     data = get_ccri_metadata(query)
 
     return data
+
+
+if __name__ == "__main__":
+    logger.info("🚀 Starting server... ")
+
+    logger.info(
+        'Check "http://localhost:%s/%s" for the server status',
+        config.server.port,
+        config.server.transport,
+    )
+
+    mcp.run(config.server.transport)
