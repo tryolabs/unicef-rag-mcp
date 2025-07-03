@@ -1,7 +1,7 @@
 """Test cases for server module."""
 
-from rag.constants import EMPTY_QUERY_RESPONSE
-from rag.server import get_ccri_relevant_information
+from constants import EMPTY_QUERY_RESPONSE
+from server import get_ccri_relevant_information
 
 
 class TestServer:

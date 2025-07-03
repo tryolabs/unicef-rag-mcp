@@ -1,14 +1,13 @@
+from config import config
 from dotenv import load_dotenv
+from handlers import get_ccri_metadata
 from mcp.server.fastmcp import FastMCP
-
-from rag.config import config
-from rag.handlers import get_ccri_metadata
-from rag.logging_config import get_logger
 
 load_dotenv(override=True)
 
 mcp = FastMCP("RAG MCP", port=config.server.port)
 
+from logging_config import get_logger  # noqa: E402
 
 logger = get_logger(__name__)
 
@@ -26,7 +25,9 @@ def get_ccri_relevant_information(query: str) -> str:
     Returns:
         The most relevant chunks from the CCRI technical documentation as a string.
     """
+    logger.info("Getting CCRI relevant information for query: %s", query)
     data = get_ccri_metadata(query)
+    logger.info("Successfully got CCRI relevant information for query: %s", query)
 
     return data
 

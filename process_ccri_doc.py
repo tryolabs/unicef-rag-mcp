@@ -1,16 +1,15 @@
 from pathlib import Path
 
+from constants import (
+    CCRI_METADATA_FILENAME,
+    CCRI_METADATA_PERSIST_DIR,
+)
 from dotenv import load_dotenv
 from llama_index.core import (
     Document,
     VectorStoreIndex,
 )
-
-from rag.constants import (
-    CCRI_METADATA_FILENAME,
-    CCRI_METADATA_PERSIST_DIR,
-)
-from rag.logging_config import get_logger
+from logging_config import get_logger
 
 logger = get_logger(__name__)
 

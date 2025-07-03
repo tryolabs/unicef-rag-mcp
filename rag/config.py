@@ -1,9 +1,8 @@
 from pathlib import Path
 
 import yaml
-
-from rag.logging_config import get_logger
-from rag.schemas import Config, ServerConfig
+from logging_config import get_logger
+from schemas import Config, ServerConfig
 
 logger = get_logger(__name__)
 

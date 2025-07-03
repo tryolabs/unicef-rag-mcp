@@ -1,13 +1,15 @@
+from constants import (
+    CCRI_METADATA_PERSIST_DIR,
+    EMPTY_QUERY_RESPONSE,
+)
 from llama_index.core import (
     StorageContext,
     load_index_from_storage,  # type: ignore[misc]
 )
 from llama_index.core.retrievers import VectorIndexRetriever
+from logging_config import get_logger
 
-from rag.constants import (
-    CCRI_METADATA_PERSIST_DIR,
-    EMPTY_QUERY_RESPONSE,
-)
+logger = get_logger(__name__)
 
 
 def get_ccri_metadata(query: str) -> str:
@@ -26,6 +28,7 @@ def get_ccri_metadata(query: str) -> str:
         The most relevant chunks from the CCRI technical documentation as a string.
     """
     if query.strip() == "":
+        logger.warning("Empty query received. Returning empty response.")
         return EMPTY_QUERY_RESPONSE
 
     vector_index = load_index_from_storage(  # type: ignore[misc]

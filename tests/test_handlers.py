@@ -1,7 +1,7 @@
 """Test cases for handlers module."""
 
-from rag.constants import EMPTY_QUERY_RESPONSE
-from rag.handlers import get_ccri_metadata
+from constants import EMPTY_QUERY_RESPONSE
+from handlers import get_ccri_metadata
 
 
 class TestHandlers:
