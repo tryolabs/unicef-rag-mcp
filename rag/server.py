@@ -5,7 +5,12 @@ from mcp.server.fastmcp import FastMCP
 
 load_dotenv(override=True)
 
-mcp = FastMCP("RAG MCP", port=config.server.port)
+
+mcp = FastMCP(
+    "RAG MCP",
+    host=config.server.host,
+    port=config.server.port,
+)
 
 from logging_config import get_logger  # noqa: E402
 
