@@ -1,45 +1,167 @@
-# UNICEF Technical Documentation RAG MCP
+# UNICEF Technical Documentation RAG MCP Server
 
-This is the project for the MCP server for the UNICEF Technical Documentation RAG.
+The UNICEF Technical Documentation RAG (Retrieval-Augmented Generation) MCP Server provides intelligent access to technical documentation through semantic search capabilities. This Model Context Protocol (MCP) server specializes in processing and retrieving information from the Children's Climate Risk Index (CCRI) Technical Documentation and related climate risk assessment materials.
 
-## Development
+## Overview
+
+This MCP server serves as the technical documentation backend for the UNICEF Geosphere project, providing access to the CCRI Technical Documentation.
+
+## Features
+
+### Core Capabilities
+
+- **Document Processing**: Automatic parsing and indexing of technical documentation
+- **Vector Search**: Semantic similarity-based document retrieval
+- **Context Extraction**: Relevant passages for answering specific questions
+
+### Technical Documentation Coverage
+
+- **Climate Risk Methodologies**: CCRI calculation approaches and algorithms
+- **Dataset Specifications**: Detailed descriptions of hazard and exposure datasets
+- **Indicator Definitions**: Technical definitions of risk indicators
+- **Data Sources**: Source documentation
+
+## Technology Stack
+
+- **FastMCP**: Model Context Protocol server framework
+- **Vector Database**: Document embeddings and similarity search
+- **LlamaIndex**: Document processing and RAG pipelines
+- **Sentence Transformers**: Text embedding generation
+
+## Project Structure
+
+```
+rag/
+├── server.py              # MCP server and tool definitions
+├── handlers.py            # RAG implementation and document processing
+├── config.py              # Configuration and settings management
+├── schemas.py             # Pydantic models and validation
+├── constants.py           # Application constants
+├── config.yaml            # Server configuration
+├── logging_config.py      # Logging setup
+└── data/vector_index/     # Document storage and vector indices
+process_ccri_doc.py        # Document processing script
+CCRI_2025_Technical_Documentation.md # CCRI Technical Documentation
+```
+
+## Prerequisites
+
+### Document Processing Requirements
+
+- **Source Documents**: CCRI Technical Documentation (Markdown format)
+- **Vector Storage**: Persistent vector database for document embeddings
+- **Processing Power**: Sufficient resources for document embedding generation
+
+## Available Tools
+
+The MCP server exposes specialized tools for technical documentation access:
+
+### 1. Technical Documentation Search
+
+#### `get_ccri_relevant_information(question: str)`
+
+Performs semantic search against the CCRI technical documentation to find relevant information.
+
+**Parameters**:
+
+- `question` (required): Natural language question about climate risk methodologies, datasets, or technical specifications
+
+**Returns**: Dictionary containing:
+
+- `data`: List of relevant document sections
+- `input_arguments`: Input arguments for the tool
+
+## Installation
 
 ### Dependencies
 
-Dependencies are managed with [uv](https://docs.astral.sh/uv/).
-
-To install the dependencies, run:
-
 ```bash
+# Install dependencies using uv
 uv sync
 ```
 
-### Processing the CCRI technical documentation
+### Document Processing Setup
 
-**Before** running the server, you need to process the CCRI technical documentation and persist the vector index.
-
-To do this, run:
+**Before running the server**, you must process the CCRI technical documentation:
 
 ```bash
+# Process and index the CCRI documentation
 uv run python process_ccri_doc.py
 ```
 
-### Running the server
+This step:
 
-To run the server, run:
+1. Parses the CCRI Technical Documentation Markdown
+2. Splits content into searchable chunks
+3. Generates vector embeddings for each chunk
+4. Creates a persistent vector index
+5. Stores metadata for each document section
+
+## Configuration
+
+### Server Configuration
+
+**`rag/config.yaml`**:
+
+```yaml
+server:
+  host: "0.0.0.0" # Server bind address
+  port: 8002 # Server port
+  transport: "sse" # MCP transport protocol
+```
+
+## Development
+
+### Running the Server
 
 ```bash
+# Development mode
 mcp dev rag/server.py
+
+# Production mode
+uv run rag/server.py
 ```
 
-### Running the tests
-
-To run the tests, run:
+### Testing
 
 ```bash
+# Run all tests
 uv run pytest
+
+# Run specific tests
+uv run pytest tests/test_handlers.py -v
 ```
+
+### Development Setup
+
+1. **Clone repository**
+2. **Install dependencies**: `uv sync`
+3. **Process documentation**: `uv run python process_ccri_doc.py`
+4. **Run tests**: `uv run pytest`
+5. **Start server**: `mcp dev rag/server.py`
+
+## Contributing
+
+### Development Guidelines
+
+1. **Code Style**: Follow PEP 8 and use type hints
+2. **Testing**: Add tests for new RAG functionality
+3. **Documentation**: Update tool descriptions and examples
+
+### Adding New Documents
+
+1. **Document Preparation**: Ensure documents are in markdown format
+2. **Processing Script**: Update `process_ccri_doc.py` for new documents
+3. **Metadata Schema**: Extend metadata structure if needed
+4. **Testing**: Verify search functionality with new content
+5. **Index Update**: Regenerate vector index with new documents
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Support
+
+- **Issues**: Submit issues on GitHub repository
+- **RAG Documentation**: [LlamaIndex RAG Guide](https://docs.llamaindex.ai/en/stable/module_guides/indexing/vector_store_index/)
+- **Technical Support**: Repository maintainers
