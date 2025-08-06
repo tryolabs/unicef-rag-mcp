@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-data/
 # C extensions
 *.so
 
@@ -128,7 +127,6 @@ cython_debug/
 **/.DS_Store
 
 # Some reasonable project exclusions
-/data/
 /models/
 /logs/
 

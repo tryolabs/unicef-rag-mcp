@@ -27,5 +27,6 @@ repos:
         exclude: >-
           (?x)^(
               \.env\.example|
-              \.env\.sample
+              \.env\.sample|
+              rag/data/.*
           )$
