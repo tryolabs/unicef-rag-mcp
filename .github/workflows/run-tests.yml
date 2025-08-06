@@ -27,4 +27,6 @@ jobs:
         run: uv sync --frozen
 
       - name: Run tests with pytest
+        env:
+          AWS_BEARER_TOKEN_BEDROCK: ${{ secrets.AWS_BEARER_TOKEN_BEDROCK }}
         run: uv run pytest
