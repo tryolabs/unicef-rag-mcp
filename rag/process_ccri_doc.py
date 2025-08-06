@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from config import config
 from constants import (
     CCRI_METADATA_FILENAME,
     CCRI_METADATA_PERSIST_DIR,
@@ -7,8 +8,10 @@ from constants import (
 from dotenv import load_dotenv
 from llama_index.core import (
     Document,
+    Settings,
     VectorStoreIndex,
 )
+from llama_index.embeddings.bedrock import BedrockEmbedding
 from logging_config import get_logger
 
 logger = get_logger(__name__)
@@ -19,6 +22,12 @@ def process_ccri_doc() -> None:
         text = f.read()
 
     documents = [Document(text=text)]
+
+    config_bedrock_embeddings = BedrockEmbedding(
+        model_name=config.embeddings.model_id,
+        region_name=config.embeddings.region_name,
+    )
+    Settings.embed_model = config_bedrock_embeddings
 
     vector_index = VectorStoreIndex.from_documents(documents)
     query_engine = vector_index.as_query_engine()  # type: ignore[misc]

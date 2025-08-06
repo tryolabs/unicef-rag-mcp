@@ -12,12 +12,16 @@ class TestServer:
         example_query = "What is the CCRI?"
         result = get_ccri_relevant_information(example_query)
         assert result is not None
-        assert isinstance(result, str)
-        assert len(result) > 0
+        assert isinstance(result, dict)
+        assert "data" in result
+        assert "input_arguments" in result
+        assert result["input_arguments"]["query"] == example_query
+        assert isinstance(result["data"], str)
+        assert len(result["data"]) > 0
 
     def test_get_ccri_relevant_information_empty_query(self) -> None:
         """Test handling of empty query."""
         empty_query = ""
         result = get_ccri_relevant_information(empty_query)
 
-        assert result == EMPTY_QUERY_RESPONSE
+        assert result == {"data": EMPTY_QUERY_RESPONSE, "input_arguments": {"query": empty_query}}
