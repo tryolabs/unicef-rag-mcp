@@ -14,7 +14,16 @@ class ServerConfig:
 
 
 @dataclass
+class EmbeddingsConfig:
+    """Model configuration settings."""
+
+    model_id: str
+    region_name: str
+
+
+@dataclass
 class Config:
     """Configuration settings."""
 
     server: ServerConfig
+    embeddings: EmbeddingsConfig

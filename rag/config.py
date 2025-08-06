@@ -1,8 +1,10 @@
 from pathlib import Path
 
 import yaml
+from llama_index.core import Settings
+from llama_index.embeddings.bedrock import BedrockEmbedding
 from logging_config import get_logger
-from schemas import Config, ServerConfig
+from schemas import Config, EmbeddingsConfig, ServerConfig
 
 logger = get_logger(__name__)
 
@@ -38,12 +40,25 @@ def load_config(config_path: Path | None = None) -> Config:
         logger.error(msg, transport, valid_transports)
         raise ValueError(msg, transport, valid_transports)
 
+    embeddings_config = EmbeddingsConfig(
+        model_id=config_data["embeddings"]["model_id"],
+        region_name=config_data["embeddings"]["region_name"],
+    )
+
+    config_bedrock_embeddings = BedrockEmbedding(
+        model_name=embeddings_config.model_id,
+        region_name=embeddings_config.region_name,
+    )
+
+    Settings.embed_model = config_bedrock_embeddings
+
     return Config(
         server=ServerConfig(
             host=config_data["server"]["host"],
             port=config_data["server"]["port"],
             transport=transport,
-        )
+        ),
+        embeddings=embeddings_config,
     )
 
 
