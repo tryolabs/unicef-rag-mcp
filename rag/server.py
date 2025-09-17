@@ -38,6 +38,10 @@ def get_ccri_relevant_information(query: str) -> dict[str, str | dict[str, str]]
 
 
 if __name__ == "__main__":
+    from initialize import initialize_app
+
+    initialize_app()
+
     logger.info("🚀 Starting server... ")
 
     logger.info(
