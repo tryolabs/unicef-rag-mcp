@@ -16,19 +16,20 @@ logger = get_logger(__name__)
 
 
 def get_ccri_metadata(query: str) -> str:
-    """Get the metadata for the CCRI dataset.
+    """Get the relevant information from the Technical Documentation.
 
-    The documentation contains detailed information about the CCRI methodology,
-    data sources, and technical specifications for the Climate Change Risk Index.
+    The function searches the Global Child Hazard Database - Technical Documentation
+    for a given query, returning the most relevant chunks.
 
-    This function uses a vector index to search the CCRI technical documentation.
-    It returns the most relevant information from the documentation based on the query.
+    The documentation contains detailed information about the Global Child Hazard Database,
+    data sources, and technical specifications for the Global Child Hazard Database.
 
     Args:
-        query: The query to search the CCRI technical documentation.
+        query (str): The query to search the Global Child Hazard Database - Technical Documentation.
 
     Returns:
-        The most relevant chunks from the CCRI technical documentation as a string.
+        str: A string containing the most relevant chunks from
+          the Global Child Hazard Database - Technical Documentation and the input arguments.
     """
     if query.strip() == "":
         logger.warning("Empty query received. Returning empty response.")

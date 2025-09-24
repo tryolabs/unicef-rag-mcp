@@ -19,16 +19,20 @@ logger = get_logger(__name__)
 
 @mcp.tool(name="get_ccri_relevant_information")
 def get_ccri_relevant_information(query: str) -> dict[str, str | dict[str, str]]:
-    """Get the relevant information from the CCRI technical documentation for a given query.
+    """Get the relevant information from the Technical Documentation.
 
-    The documentation contains detailed information about the CCRI methodology,
-    data sources, and technical specifications for the Climate Change Risk Index.
+    The function searches the Global Child Hazard Database - Technical Documentation
+    for a given query, returning the most relevant chunks.
+
+    The documentation contains detailed information about the Global Child Hazard Database,
+    data sources, and technical specifications for the Global Child Hazard Database.
 
     Args:
-        query: The query to search the CCRI technical documentation.
+        query (str): The query to search the Global Child Hazard Database - Technical Documentation.
 
     Returns:
-        The most relevant chunks from the CCRI technical documentation as a string.
+        dict[str, str | dict[str, str]]: A dictionary containing the most relevant chunks from
+          the Global Child Hazard Database - Technical Documentation and the input arguments.
     """
     logger.info("Getting CCRI relevant information for query: %s", query)
     data = get_ccri_metadata(query)

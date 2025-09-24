@@ -2,13 +2,13 @@
 
 ## Overview
 
-The UNICEF RAG MCP project contains unit tests to ensure the reliability of the Retrieval-Augmented Generation (RAG) system for querying CCRI (Climate Change Risk Index) documentation and metadata.
+The UNICEF RAG MCP project contains unit tests to ensure the reliability of the Retrieval-Augmented Generation (RAG) system for querying the Global Child Hazard Database - Technical Documentation and metadata.
 
 ## Test Structure
 
 ### Test Files
 
-- **`test_handlers.py`** - Tests CCRI metadata retrieval and query handling
+- **`test_handlers.py`** - Tests metadata retrieval and query handling for the Global Child Hazard Database
 - **`test_server.py`** - Tests MCP server functionality
 - **`test_logging.py`** - Tests logging configuration and setup
 
@@ -16,7 +16,7 @@ The UNICEF RAG MCP project contains unit tests to ensure the reliability of the 
 
 #### Unit Tests
 
-- **Handler Tests**: CCRI metadata querying, response formatting
+- **Handler Tests**: Global Child Hazard Database metadata querying, response formatting
 - **Server Tests**: MCP server function testing
 - **Query Processing**: Text search and retrieval functionality
 
@@ -38,7 +38,7 @@ The UNICEF RAG MCP project contains unit tests to ensure the reliability of the 
 
 ### Query Handling
 
-- **Valid Queries**: Tests with meaningful questions like "What is the CCRI?"
+- **Valid Queries**: Tests with meaningful questions like "What is the Global Child Hazard Database?"
 - **Empty Queries**: Handles empty/null queries with predefined responses
 - **Response Validation**: Ensures responses are strings with content
 - **Error Handling**: Graceful handling of query processing errors
@@ -54,8 +54,8 @@ uv sync
 # Activate virtual environment
 source .venv/bin/activate
 
-# Ensure CCRI documentation is available
-# The system should have access to CCRI_2025_Technical_Documentation.md
+# Ensure Global Child Hazard Database documentation is available
+# The system should have access to Global_Child_Hazard_Database_2025_Technical_Documentation.md
 ```
 
 ### Run All Tests

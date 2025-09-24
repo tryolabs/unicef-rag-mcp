@@ -1,10 +1,10 @@
 # UNICEF Technical Documentation RAG MCP Server
 
-The UNICEF Technical Documentation RAG (Retrieval-Augmented Generation) MCP Server provides intelligent access to technical documentation through semantic search capabilities. This Model Context Protocol (MCP) server specializes in processing and retrieving information from the Children's Climate Risk Index (CCRI) Technical Documentation and related climate risk assessment materials.
+The UNICEF Technical Documentation RAG (Retrieval-Augmented Generation) MCP Server provides intelligent access to technical documentation through semantic search capabilities. This Model Context Protocol (MCP) server specializes in processing and retrieving information from the Global Child Hazard Database - Technical Documentation and related climate risk assessment materials.
 
 ## Overview
 
-This MCP server serves as the technical documentation backend for the UNICEF Geosphere project, providing access to the CCRI Technical Documentation.
+This MCP server serves as the technical documentation backend for the UNICEF Geosphere project, providing access to the Global Child Hazard Database - Technical Documentation.
 
 ## Features
 
@@ -41,16 +41,26 @@ rag/
 ├── logging_config.py      # Logging setup
 └── data/vector_index/     # Document storage and vector indices
 process_ccri_doc.py        # Document processing script
-CCRI_2025_Technical_Documentation.md # CCRI Technical Documentation
+Global_Child_Hazard_Database_2025_Technical_Documentation.md # Global Child Hazard Database - Technical Documentation
 ```
 
 ## Prerequisites
 
 ### Document Processing Requirements
 
-- **Source Documents**: CCRI Technical Documentation (Markdown format)
+- **Source Documents**: Global Child Hazard Database - Technical Documentation (Markdown format)
 - **Vector Storage**: Persistent vector database for document embeddings
 - **Processing Power**: Sufficient resources for document embedding generation
+
+Note: The technical documentation must be provided as a single Markdown file named
+`Global_Child_Hazard_Database_2025_Technical_Documentation.md` at the repository root. If your source document
+is a Word or Google Doc, convert it to Markdown using one of the available online tools
+like [word2md.com](https://word2md.com/) or a built-in tool like Pandoc. Using
+Pandoc, you can convert the document to Markdown using the following command:
+
+```bash
+pandoc --from docx --to markdown --extract-media=. <input_file.docx> -o Global_Child_Hazard_Database_2025_Technical_Documentation.md
+```
 
 ## Available Tools
 
@@ -60,7 +70,7 @@ The MCP server exposes specialized tools for technical documentation access:
 
 #### `get_ccri_relevant_information(question: str)`
 
-Performs semantic search against the CCRI technical documentation to find relevant information.
+Performs semantic search against the Global Child Hazard Database - Technical Documentation to find relevant information.
 
 **Parameters**:
 
@@ -82,16 +92,16 @@ uv sync
 
 ### Document Processing Setup
 
-**Before running the server**, you must process the CCRI technical documentation:
+**Before running the server**, you must process the Global Child Hazard Database - Technical Documentation:
 
 ```bash
-# Process and index the CCRI documentation
+# Process and index the Global Child Hazard Database documentation
 uv run python process_ccri_doc.py
 ```
 
 This step:
 
-1. Parses the CCRI Technical Documentation Markdown
+1. Parses the Global Child Hazard Database - Technical Documentation Markdown
 2. Splits content into searchable chunks
 3. Generates vector embeddings for each chunk
 4. Creates a persistent vector index
