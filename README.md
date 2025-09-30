@@ -109,16 +109,18 @@ This step:
 
 ## Configuration
 
-### Server Configuration
+### Server configuration
 
 **`rag/config.yaml`**:
 
 ```yaml
 server:
   host: "0.0.0.0" # Server bind address
-  port: 8002 # Server port
+  port: 6001 # Internal MCP port
   transport: "sse" # MCP transport protocol
 ```
+
+The server is reachable only on the internal Docker network. The agent connects via `rag_mcp:6001/sse`.
 
 ## Development
 
@@ -141,6 +143,17 @@ uv run pytest
 # Run specific tests
 uv run pytest tests/test_handlers.py -v
 ```
+
+## Secrets and environment
+
+This service requires an AWS Bedrock bearer token when using the default configuration:
+
+- `AWS_BEARER_TOKEN_BEDROCK`: Bearer token for Bedrock (read from Docker secret `aws_bearer_token_bedrock` or environment variable; `.env` supported)
+
+Notes:
+
+- Environment variables are loaded with `.env` support (see `rag/initialize.py`).
+- Embeddings are configured in `rag/config.yaml` (`embeddings.model_id`, `embeddings.region_name`).
 
 ### Development Setup
 
